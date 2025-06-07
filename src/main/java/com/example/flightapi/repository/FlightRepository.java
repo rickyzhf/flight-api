@@ -3,6 +3,7 @@ package com.example.flightapi.repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -21,4 +22,5 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     List<Flight> findByFromAirportAndToAirportAndDepartureTimeBetween(
             String fromAirport, String toAirport, LocalDateTime start, LocalDateTime end);
+    
 }

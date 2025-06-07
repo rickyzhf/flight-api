@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,5 +20,10 @@ public class FlightService {
         LocalDate departureDate = LocalDate.parse(searchDTO.getDepartureDate());
         return flightRepository.findByFromAirportAndToAirportAndDepartureDate(
                 searchDTO.getFrom(), searchDTO.getTo(), departureDate);
+    }
+    public Optional<Flight> searchFlightsId(Long id) {
+
+        return flightRepository.findById(id);
+        
     }
 }
