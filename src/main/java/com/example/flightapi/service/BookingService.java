@@ -1,5 +1,10 @@
 package com.example.flightapi.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.example.flightapi.dto.BookingResponseDTO;
 import com.example.flightapi.entity.Booking;
 import com.example.flightapi.entity.Flight;
@@ -7,11 +12,8 @@ import com.example.flightapi.entity.User;
 import com.example.flightapi.repository.BookingRepository;
 import com.example.flightapi.repository.FlightRepository;
 import com.example.flightapi.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -53,4 +55,14 @@ public class BookingService {
         dto.setStatus(booking.getStatus());
         return dto;
     }
-}
+    
+    public Booking getBookingsByUser(Long bookingId, String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Flight flight = flightRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Booking booking = bookingRepository.findByUserAndFlight( user, flight);
+        return booking;
+    }
+
+   }

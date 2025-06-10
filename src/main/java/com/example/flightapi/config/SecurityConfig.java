@@ -29,7 +29,8 @@ public class SecurityConfig {
             .csrf().disable()
             .cors().and()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**", "/book/**", "/swagger-ui/**","/api/flights/search","/api/flights/searchId","/api/bookings", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api/auth/**",  "/book/**", "/v3/api-docs/**", "/swagger-ui/**",
+                		"/api/flights/search","/api/flights/searchId","/api/bookings","/api/bookings/**","api/airports").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

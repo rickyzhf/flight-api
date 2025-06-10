@@ -28,6 +28,14 @@ public class BookingController {
         return ResponseEntity.ok(BaseResponse.success(bookings));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseResponse<Booking>> getBookingsId(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+    	Booking detail  = bookingService.getBookingsByUser(id, userDetails.getUsername());
+        return ResponseEntity.ok(BaseResponse.success(detail));
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse<Booking>> createBooking(
             @AuthenticationPrincipal UserDetails userDetails,
